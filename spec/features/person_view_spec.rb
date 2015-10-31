@@ -7,12 +7,23 @@ describe 'the person view', type: :feature do
   before(:each) do
     person.phone_numbers.create(number: "555-1234")
     person.phone_numbers.create(number: "555-5678")
+    # person.email_addresses.create(address: "ammcrawford@hotmail.com")
+    # person.email_addresses.create(address: "5678@smcm.edu")
     visit person_path(person)
   end
 
   it 'shows the phone numbers' do
     person.phone_numbers.each do |phone|
       expect(page).to have_content(phone.number)
+    end
+  end
+
+  it 'shows the email addresses' do
+    person.email_addresses.create(address: "ammcrawford@hotmail.com")
+    person.email_addresses.create(address: "5678@smcm.edu")
+    visit person_path(person)
+    person.email_addresses.each do |email|
+    expect(page).to have_content('ammcrawford@hotmail.com')
     end
   end
 
