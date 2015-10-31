@@ -24,12 +24,10 @@ RSpec.describe EmailAddressesController, type: :controller do
   # EmailAddress. As you add validations to EmailAddress, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+    {address: "ammcrawford@gmail.com", person_id: 1} }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+    {address: nil, person_id: nil } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -103,8 +101,7 @@ RSpec.describe EmailAddressesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+          {address: "ammcrawford@gmail.com", person_id: 1}      }
 
       it "updates the requested email_address" do
         email_address = EmailAddress.create! valid_attributes
