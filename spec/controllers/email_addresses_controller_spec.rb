@@ -109,7 +109,8 @@ RSpec.describe EmailAddressesController, type: :controller do
         email_address = EmailAddress.create! valid_attributes
         put :update, {:id => email_address.to_param, :email_address => new_attributes}, valid_session
         email_address.reload
-        skip("Add assertions for updated state")
+        expect(email_address.address).to eq('ammcrawford@gmail.com')
+        expect(email_address.contact_id).to eq(1)
       end
 
       it "assigns the requested email_address as @email_address" do
