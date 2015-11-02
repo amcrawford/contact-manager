@@ -16,6 +16,15 @@ describe 'the company view', type: :feature do
     end
   end
 
+  it 'shows the email addresses' do
+    company.email_addresses.create(address: "ammcrawford@hotmail.com")
+    company.email_addresses.create(address: "5678@smcm.edu")
+    visit company_path(company)
+    company.email_addresses.each do |email|
+    expect(page).to have_content('ammcrawford@hotmail.com')
+    end
+  end
+
   it 'has a link to add a new phone number' do
     expect(page).to have_link('Add phone number', href: new_phone_number_path(contact_id: company.id, contact_type: 'Company'))
   end
@@ -26,6 +35,18 @@ describe 'the company view', type: :feature do
     page.click_button('Create Phone number')
     expect(current_path).to eq(company_path(company))
     expect(page).to have_content('555-8888')
+  end
+
+  it 'has a link to add a new email address' do
+    expect(page).to have_link('Add email address', href: new_email_address_path(contact_id: company.id, contact_type: 'Company'))
+  end
+
+  it 'adds a new email address' do
+    page.click_link('Add email address')
+    page.fill_in('Address', with: 'ammcrawford@gmail.com')
+    page.click_button('Create Email address')
+    expect(current_path).to eq(company_path(company))
+    expect(page).to have_content('ammcrawford@gmail.com')
   end
 
   it 'has links to edit phone numbers' do
